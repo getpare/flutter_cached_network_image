@@ -13,7 +13,7 @@ class BasicContent extends StatelessWidget {
           children: <Widget>[
             _blurHashImage(),
             _sizedContainer(
-              const Image(
+              Image(
                 image: CachedNetworkImageProvider(
                   'https://via.placeholder.com/350x150',
                 ),
@@ -21,10 +21,9 @@ class BasicContent extends StatelessWidget {
             ),
             _sizedContainer(
               CachedNetworkImage(
-                progressIndicatorBuilder: (context, url, progress) =>
-                  Center(
-                    child: CircularProgressIndicator(
-                  value: progress.progress,
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    value: progress.progress,
                   ),
                 ),
                 imageUrl:

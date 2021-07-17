@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -38,7 +40,7 @@ abstract class CachedNetworkImageProvider
   /// The [imageRenderMethodForWeb] defines the behavior of the ImageProvider
   /// when compiled for web. See the documentation of [ImageRenderMethodForWeb]
   /// for the benefits of each method.
-  const factory CachedNetworkImageProvider(
+  factory CachedNetworkImageProvider(
     String url, {
     int maxHeight,
     int maxWidth,
@@ -81,6 +83,9 @@ abstract class CachedNetworkImageProvider
   /// Max width in pixels for the image. When set the resized image is
   /// stored in the cache.
   int get maxWidth;
+
+  /// Get the gytes from the image itself
+  Uint8List get bytes;
 
   @override
   ImageStreamCompleter load(

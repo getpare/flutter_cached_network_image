@@ -1,4 +1,5 @@
 import 'dart:async' show Future, StreamController, scheduleMicrotask;
+import 'dart:typed_data';
 import 'dart:ui' as ui show Codec;
 
 import 'package:cached_network_image/src/image_provider/multi_image_stream_completer.dart';
@@ -16,7 +17,7 @@ class CachedNetworkImageProvider
     implements image_provider.CachedNetworkImageProvider {
   /// Creates an ImageProvider which loads an image from the [url], using the [scale].
   /// When the image fails to load [errorListener] is called.
-  const CachedNetworkImageProvider(
+  CachedNetworkImageProvider(
     this.url, {
     this.maxHeight,
     this.maxWidth,
@@ -117,6 +118,7 @@ class CachedNetworkImageProvider
         if (result is FileInfo) {
           var file = result.file;
           var bytes = await file.readAsBytes();
+          this.bytes = bytes;
           var decoded = await decode(bytes);
           yield decoded;
         }
@@ -152,4 +154,7 @@ class CachedNetworkImageProvider
 
   @override
   String toString() => '$runtimeType("$url", scale: $scale)';
+
+  @override
+  Uint8List bytes;
 }
